@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yorker Club Booking</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+header{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+padding:30px;
+text-align:center;
+}
+
+header h1{
+font-size:42px;
+}
+
+header p{
+margin-top:10px;
+font-size:18px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+margin-bottom:20px;
+}
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.box{
+padding:25px;
+border-radius:12px;
+background:#f8fafc;
+border:2px solid #e2e8f0;
+text-align:center;
+}
+
+.box h3{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.price{
+font-size:30px;
+font-weight:bold;
+color:#16a34a;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:6px;
+font-weight:600;
+}
+
+input,select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+.total{
+background:#dcfce7;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+font-size:24px;
+font-weight:bold;
+color:#15803d;
+text-align:center;
+}
+
+.upi{
+margin-top:20px;
+background:#eff6ff;
+padding:20px;
+border-radius:10px;
+border:1px solid #bfdbfe;
+}
+
+.upi-id{
+font-size:22px;
+font-weight:bold;
+color:#2563eb;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#16a34a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#15803d;
+}
+
+.success{
+display:none;
+margin-top:20px;
+padding:20px;
+background:#dcfce7;
+border-radius:10px;
+text-align:center;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+color:#666;
+}
+
+@media(max-width:600px){
+header h1{
+font-size:30px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏏 Yorker Club</h1>
+<p>Turf • PS5 • Billiards</p>
+<p>Open Daily: 6:00 AM - 12:00 AM</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Facilities & Pricing</h2>
+
+<div class="pricing">
+
+<div class="box">
+<h3>🏏 Turf Ground</h3>
+<div class="price">₹649/hr</div>
+</div>
+
+<div class="box">
+<h3>🎮 PS5 Gaming</h3>
+<div class="price">₹179/hr</div>
+</div>
+
+<div class="box">
+<h3>🎱 Billiards</h3>
+<div class="price">₹179/hr</div>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<h2>Book Your Slot</h2>
+
+<form id="bookingForm">
+
+<label>Customer Name</label>
+<input type="text" required>
+
+<label>Mobile Number</label>
+<input type="tel" required>
+
+<label>Select Facility</label>
+<select id="facility" onchange="calculateTotal()">
+<option value="649">🏏 Turf Ground - ₹649/hr</option>
+<option value="179">🎮 PS5 Gaming - ₹179/hr</option>
+<option value="179">🎱 Billiards - ₹179/hr</option>
+</select>
+
+<label>Select Date</label>
+<input type="date" required>
+
+<label>Select Time Slot</label>
+<select required>
+<option>06:00 AM - 07:00 AM</option>
+<option>07:00 AM - 08:00 AM</option>
+<option>08:00 AM - 09:00 AM</option>
+<option>09:00 AM - 10:00 AM</option>
+<option>10:00 AM - 11:00 AM</option>
+<option>11:00 AM - 12:00 PM</option>
+<option>12:00 PM - 01:00 PM</option>
+<option>01:00 PM - 02:00 PM</option>
+<option>02:00 PM - 03:00 PM</option>
+<option>03:00 PM - 04:00 PM</option>
+<option>04:00 PM - 05:00 PM</option>
+<option>05:00 PM - 06:00 PM</option>
+<option>06:00 PM - 07:00 PM</option>
+<option>07:00 PM - 08:00 PM</option>
+<option>08:00 PM - 09:00 PM</option>
+<option>09:00 PM - 10:00 PM</option>
+<option>10:00 PM - 11:00 PM</option>
+<option>11:00 PM - 12:00 AM</option>
+</select>
+
+<label>Number of Hours</label>
+<input type="number" id="hours" value="1" min="1" max="12" oninput="calculateTotal()">
+
+<div class="total">
+Total Amount: ₹<span id="total">649</span>
+</div>
+
+<div class="upi">
+
+<h3>💳 UPI Payment Only</h3>
+
+<p>Pay using Google Pay, PhonePe, Paytm, BHIM or any UPI app.</p>
+
+<div class="upi-id">
+nishatbaig987@okicici
+</div>
+
+<a href="upi://pay?pa=nishatbaig987@okicici&pn=Yorker Club"
+style="
+display:inline-block;
+background:#2563eb;
+color:white;
+padding:12px 20px;
+border-radius:8px;
+text-decoration:none;
+margin-top:10px;">
+Pay via UPI
+</a>
+
+<label>UPI Transaction ID</label>
+<input type="text" placeholder="Enter Transaction ID" required>
+
+</div>
+
+<button type="submit">
+BOOK NOW
+</button>
+
+</form>
+
+<div class="success" id="success">
+<h2>✅ Booking Request Submitted</h2>
+<p>Payment details received.</p>
+<p>Yorker Club will verify payment and confirm your booking.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+© Yorker Club | Turf • PS5 • Billiards
+</div>
+
+<script>
+
+function calculateTotal(){
+
+let rate =
+parseInt(document.getElementById("facility").value);
+
+let hours =
+parseInt(document.getElementById("hours").value || 1);
+
+document.getElementById("total").innerText =
+rate * hours;
+}
+
+document.getElementById("bookingForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+document.getElementById("success").style.display="block";
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
+});
+
+calculateTotal();
+
+</script>
+
+</body>
+</html>
