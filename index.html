@@ -297,7 +297,12 @@ BOOK NOW
 
 <script>
 
-function calculateTotal(){
+document.getElementById("bookingForm")
+.addEventListener("submit", function(e){
+
+    document.getElementById("success").style.display = "block";
+
+});
 
 let rate =
 parseInt(document.getElementById("facility").value);
