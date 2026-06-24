@@ -1,9 +1,9 @@
-Got it — my mistake, I over-designed it. Let me put back your **original page exactly as you had it** and change only **one tiny thing**: the form submission so Google Forms doesn't open.
-Action: file_editor create /app/yorker_club.html --file-text "<!DOCTYPE html>
-<html lang=\"en\">
+```html
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset=\"UTF-8\">
-<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yorker Club Booking</title>
 
 <style>
@@ -162,42 +162,42 @@ font-size:30px;
 <p>Open Daily: 6:00 AM - 12:00 AM</p>
 </header>
 
-<div class=\"container\">
+<div class="container">
 
-<div class=\"card\">
+<div class="card">
 <h2>Facilities & Pricing</h2>
 
-<div class=\"pricing\">
+<div class="pricing">
 
-<div class=\"box\">
+<div class="box">
 <h3>🏏 Turf Ground</h3>
-<div class=\"price\">₹599/hr</div>
+<div class="price">₹599/hr</div>
 </div>
 
-<div class=\"box\">
+<div class="box">
 <h3>🎮 PS5 Gaming</h3>
-<div class=\"price\">₹119/hr pr person</div>
+<div class="price">₹119/hr pr person</div>
 </div>
 
-<div class=\"box\">
+<div class="box">
 <h3>🎱 Billiards</h3>
-<div class=\"price\">₹179/hr</div>
+<div class="price">₹179/hr</div>
 </div>
 
 </div>
 </div>
 
-<div class=\"card\">
+<div class="card">
 
 <h2>Book Your Slot</h2>
 
-<form id=\"bookingForm\"
-action=\"https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse\"
-method=\"POST\"
-target=\"hiddenFrame\">
+<form id="bookingForm"
+action="https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse"
+method="POST"
+target="hiddenFrame">
 
 <label>Customer Name</label>
-<input type=\"text\" name=\"entry.973165975\" required>
+<input type="text" name="entry.973165975" required>
 
 
 
@@ -205,41 +205,41 @@ target=\"hiddenFrame\">
 
 
 <label>Mobile Number</label>
-<input type=\"tel\" name=\"entry.1985601712\" required>
+<input type="tel" name="entry.1985601712" required>
 
 
 <label>Select Facility</label>
-<select name=\"entry.734662859\" required>
+<select name="entry.734662859" required>
 
-    <option value=\"TURF\">🏏 Turf Ground</option>
-    <option value=\"PS5\">🎮 PS5 Gaming</option>
-    <option value=\"BILLIARDS\">🎱 Billiards</option>
+    <option value="TURF">🏏 Turf Ground</option>
+    <option value="PS5">🎮 PS5 Gaming</option>
+    <option value="BILLIARDS">🎱 Billiards</option>
 </select>
 <label>Select Date</label>
-<input type=\"date\" name=\"entry.748030795\" required>
+<input type="date" name="entry.748030795" required>
     
 <label>Select Time</label>
-<input type=\"time\" name=\"entry.456332830\" required>
+<input type="time" name="entry.456332830" required>
 
 
 
 <label>Hours</label>
-<input type=\"number\" name=\"entry.2128269927\" min=\"1\" value=\"1\" required>
+<input type="number" name="entry.2128269927" min="1" value="1" required>
 
-<div class=\"upi\">
+<div class="upi">
     <h3>💳 Pay via UPI</h3>
-    <div class=\"upi-id\">7055060338@ptyes</div>
+    <div class="upi-id">7055060338@ptyes</div>
     <p>After payment, enter the UTR number below.</p>
 </div>
 
 <label>UPI Transaction ID</label>
-<input type=\"text\" name=\"entry.55874659\" placeholder=\"Enter UTR Number\" required>
+<input type="text" name="entry.55874659" placeholder="Enter UTR Number" required>
 
-<button type=\"submit\">BOOK NOW</button>
+<button type="submit">BOOK NOW</button>
 
 </form>
 
-<div class=\"success\" id=\"success\">
+<div class="success" id="success">
 <h2>✅ Booking Request Submitted</h2>
 <p>Payment details received.</p>
 <p>Yorker Club will verify payment and confirm your booking.</p>
@@ -249,83 +249,79 @@ target=\"hiddenFrame\">
 
 </div>
 
-<div class=\"footer\">
+<div class="footer">
 © Yorker Club | Turf • PS5 • Billiards
 </div>
 
-<!-- Hidden iframe so the page does NOT redirect to Google Forms -->
-<iframe name=\"hiddenFrame\" style=\"display:none;\"></iframe>
+<iframe name="hiddenFrame" style="display:none;"></iframe>
 
 <script>
-document.getElementById(\"bookingForm\").addEventListener(\"submit\", function(e){
-    // form still submits to Google (via hidden iframe), we just show success
-    document.getElementById(\"success\").style.display = \"block\";
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: \"smooth\"
-    });
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+    document.getElementById("success").style.display = "block";
+    window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
 });
 </script>
-
-<div style=\"text-align:center;padding:20px;background:#fff;margin-top:20px;\">
+<div style="text-align:center;padding:20px;background:#fff;margin-top:20px;">
     <h3>📞 Contact Yorker Club</h3>
     <p>📱 WhatsApp:919259098933</p>
     <p>
-📍 <a href=\"https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9\" target=\"_blank\">
+📍 <a href="https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9" target="_blank">
 Green City, Behat Road, Saharanpur
 </a>
 </p>
     <p>🕒 Open Daily: 6:00 AM - 12:00 AM</p>
 
-    <a href=\"https://wa.me/919259098933\"
-       style=\"background:#25D366;color:white;padding:12px 20px;
-       border-radius:8px;text-decoration:none;\">
+    <a href="https://wa.me/919259098933"
+       style="background:#25D366;color:white;padding:12px 20px;
+       border-radius:8px;text-decoration:none;">
        📱 WhatsApp Booking
     </a>
 </div>
-<hr style=\"margin:30px 0;\">
+<hr style="margin:30px 0;">
 
-<hr style=\"margin:30px 0;\">
+<hr style="margin:30px 0;">
 
-<h2 style=\"text-align:center;\">📸 Yorker Club Gallery</h2>
+<h2 style="text-align:center;">📸 Yorker Club Gallery</h2>
 
-<div style=\"display:flex;gap:15px;justify-content:center;flex-wrap:wrap;\">
+<div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
 
-<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.41%20AM.jpeg\"
-     width=\"300\">
+<img src="WhatsApp%20Image%202026-06-22%20at%206.05.41%20AM.jpeg"
+     width="300">
 
-<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM.jpeg\"
-     width=\"300\">
+<img src="WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM.jpeg"
+     width="300">
 
-<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM%20(1).jpeg\"
-     width=\"300\">
+<img src="WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM%20(1).jpeg"
+     width="300">
 
 </div>
 
-<hr style=\"margin:30px 0;\">
+</div>
 
-<h2 style=\"text-align:center;\">⭐ Customer Reviews</h2>
+<hr style="margin:30px 0;">
 
-<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">
+<h2 style="text-align:center;">⭐ Customer Reviews</h2>
+
+<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
 ★★★★★ Excellent turf and lighting.
 <br><b>- Rahul</b>
 </div>
 
-<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">
+<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
 ★★★★★ Best PS5 gaming experience.
 <br><b>- Aman</b>
 </div>
 
-<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">
+<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
 ★★★★☆ Clean and well maintained.
 <br><b>- Arjun</b>
 </div>
 
-<hr style=\"margin:30px 0;\">
+<hr style="margin:30px 0;">
 
-<h2 style=\"text-align:center;\">📅 Availability</h2>
+<h2 style="text-align:center;">📅 Availability</h2>
 
-<div style=\"text-align:center;background:#fff;padding:20px;border-radius:10px;\">
+<div style="text-align:center;background:#fff;padding:20px;border-radius:10px;">
 Today Available Slots:
 <br><br>
 ✅ 6 AM - 8 AM
@@ -363,5 +359,4 @@ Today Available Slots:
 </div>
 </body>
 </html>
-"
-Observation: Overwrite successful: /app/yorker_club.html
+```
