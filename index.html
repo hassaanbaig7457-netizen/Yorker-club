@@ -1,456 +1,367 @@
-Excellent! 🎉 Confirming end-to-end works. Below is the **final HTML file** followed by a **step-by-step breakdown of every change** I made to fix the Google Forms behavior.
+Got it — my mistake, I over-designed it. Let me put back your **original page exactly as you had it** and change only **one tiny thing**: the form submission so Google Forms doesn't open.
+Action: file_editor create /app/yorker_club.html --file-text "<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<title>Yorker Club Booking</title>
 
----
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
 
-## 📄 The Final HTML File
+body{
+background:#f4f7fb;
+}
 
-The file is saved at **`/app/yorker_club.html`** — you can also download/copy it from below:
-Action: file_editor view /app/yorker_club.html
-Observation: [Showing lines 1-446 of 446 total] /app/yorker_club.html:
-1|<!DOCTYPE html>
-2|<html lang="en">
-3|<head>
-4|<meta charset="UTF-8">
-5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-6|<title>Yorker Club Booking</title>
-7|
-8|<style>
-9|*{
-10|  margin:0;
-11|  padding:0;
-12|  box-sizing:border-box;
-13|  font-family:'Segoe UI',sans-serif;
-14|}
-15|
-16|body{
-17|  background:#f4f7fb;
-18|  color:#0f172a;
-19|}
-20|
-21|header{
-22|  background:linear-gradient(135deg,#0f172a,#1e293b);
-23|  color:white;
-24|  padding:30px;
-25|  text-align:center;
-26|}
-27|
-28|header h1{ font-size:42px; }
-29|header p{ margin-top:10px; font-size:18px; }
-30|
-31|.container{
-32|  max-width:1000px;
-33|  margin:auto;
-34|  padding:20px;
-35|}
-36|
-37|.card{
-38|  background:white;
-39|  padding:25px;
-40|  border-radius:15px;
-41|  box-shadow:0 5px 20px rgba(0,0,0,.1);
-42|  margin-bottom:20px;
-43|}
-44|
-45|.pricing{
-46|  display:grid;
-47|  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-48|  gap:15px;
-49|  margin-top:20px;
-50|}
-51|
-52|.box{
-53|  padding:25px;
-54|  border-radius:12px;
-55|  background:#f8fafc;
-56|  border:2px solid #e2e8f0;
-57|  text-align:center;
-58|}
-59|
-60|.box h3{ font-size:24px; margin-bottom:10px; }
-61|
-62|.price{
-63|  font-size:30px;
-64|  font-weight:bold;
-65|  color:#16a34a;
-66|}
-67|
-68|label{
-69|  display:block;
-70|  margin-top:15px;
-71|  margin-bottom:6px;
-72|  font-weight:600;
-73|}
-74|
-75|input,select{
-76|  width:100%;
-77|  padding:12px;
-78|  border:1px solid #ccc;
-79|  border-radius:8px;
-80|  font-size:15px;
-81|}
-82|
-83|.total{
-84|  background:#dcfce7;
-85|  padding:15px;
-86|  margin-top:20px;
-87|  border-radius:10px;
-88|  font-size:24px;
-89|  font-weight:bold;
-90|  color:#15803d;
-91|  text-align:center;
-92|}
-93|
-94|.upi{
-95|  margin-top:20px;
-96|  background:#eff6ff;
-97|  padding:20px;
-98|  border-radius:10px;
-99|  border:1px solid #bfdbfe;
-100|}
-101|
-102|.upi-id{
-103|  font-size:22px;
-104|  font-weight:bold;
-105|  color:#2563eb;
-106|  margin:10px 0;
-107|}
-108|
-109|button{
-110|  width:100%;
-111|  padding:15px;
-112|  margin-top:20px;
-113|  background:#16a34a;
-114|  color:white;
-115|  border:none;
-116|  border-radius:10px;
-117|  font-size:18px;
-118|  cursor:pointer;
-119|}
-120|
-121|button:hover{ background:#15803d; }
-122|button:disabled{ background:#94a3b8; cursor:not-allowed; }
-123|
-124|.success{
-125|  display:none;
-126|  margin-top:20px;
-127|  padding:25px;
-128|  background:#dcfce7;
-129|  border:2px solid #16a34a;
-130|  border-radius:10px;
-131|  text-align:center;
-132|}
-133|
-134|.success h2{ color:#15803d; margin-bottom:10px; }
-135|.success .wa-btn{
-136|  display:inline-block;
-137|  margin-top:15px;
-138|  background:#25D366;
-139|  color:white;
-140|  padding:12px 24px;
-141|  border-radius:8px;
-142|  text-decoration:none;
-143|  font-weight:bold;
-144|}
-145|
-146|.footer{
-147|  text-align:center;
-148|  padding:20px;
-149|  color:#666;
-150|}
-151|
-152|.gallery{
-153|  display:grid;
-154|  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-155|  gap:15px;
-156|}
-157|
-158|.gallery img{
-159|  width:100%;
-160|  height:220px;
-161|  object-fit:cover;
-162|  border-radius:10px;
-163|}
-164|
-165|.review{
-166|  background:#fff;
-167|  padding:15px;
-168|  margin:10px 0;
-169|  border-radius:10px;
-170|  border-left:4px solid #f59e0b;
-171|}
-172|
-173|.slots{
-174|  display:grid;
-175|  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-176|  gap:10px;
-177|  margin-top:15px;
-178|}
-179|
-180|.slot{
-181|  background:#f0fdf4;
-182|  border:1px solid #86efac;
-183|  padding:10px;
-184|  text-align:center;
-185|  border-radius:8px;
-186|  color:#15803d;
-187|  font-weight:600;
-188|}
-189|
-190|@media(max-width:600px){
-191|  header h1{ font-size:30px; }
-192|}
-193|</style>
-194|</head>
-195|
-196|<body>
-197|
-198|<header>
-199|  <h1>🏏 Yorker Club</h1>
-200|  <p>Book Turf, PS5 Gaming & Billiards Online</p>
-201|  <p>Open Daily: 6:00 AM - 12:00 AM</p>
-202|</header>
-203|
-204|<div class="container">
-205|
-206|  <div class="card">
-207|    <h2>Facilities & Pricing</h2>
-208|    <div class="pricing">
-209|      <div class="box">
-210|        <h3>🏏 Turf Ground</h3>
-211|        <div class="price">₹599/hr</div>
-212|      </div>
-213|      <div class="box">
-214|        <h3>🎮 PS5 Gaming</h3>
-215|        <div class="price">₹119/hr per person</div>
-216|      </div>
-217|      <div class="box">
-218|        <h3>🎱 Billiards</h3>
-219|        <div class="price">₹179/hr</div>
-220|      </div>
-221|    </div>
-222|  </div>
-223|
-224|  <div class="card">
-225|    <h2>Book Your Slot</h2>
-226|
-227|    <form id="bookingForm">
-228|      <label>Customer Name</label>
-229|      <input type="text" id="custName" name="entry.973165975" required>
-230|
-231|      <label>Mobile Number</label>
-232|      <input type="tel" id="custMobile" name="entry.1985601712" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile" required>
-233|
-234|      <label>Select Facility</label>
-235|      <select id="facility" name="entry.734662859" required>
-236|        <option value="TURF" data-rate="599">🏏 Turf Ground - ₹599/hr</option>
-237|        <option value="PS5" data-rate="119">🎮 PS5 Gaming - ₹119/hr per person</option>
-238|        <option value="BILLIARDS" data-rate="179">🎱 Billiards - ₹179/hr</option>
-239|      </select>
-240|
-241|      <label>Select Date</label>
-242|      <input type="date" id="bookDate" name="entry.748030795" required>
-243|
-244|      <label>Select Time</label>
-245|      <input type="time" id="bookTime" name="entry.456332830" required>
-246|
-247|      <label>Hours</label>
-248|      <input type="number" id="hours" name="entry.2128269927" min="1" value="1" required>
-249|
-250|      <div class="total">
-251|        Total Amount: ₹<span id="totalAmount">599</span>
-252|      </div>
-253|
-254|      <div class="upi">
-255|        <h3>💳 Pay via UPI</h3>
-256|        <div class="upi-id">7055060338@ptyes</div>
-257|        <p>After payment, enter the UTR / Transaction ID below.</p>
-258|      </div>
-259|
-260|      <label>UPI Transaction ID</label>
-261|      <input type="text" id="utr" name="entry.55874659" placeholder="Enter UTR Number" required>
-262|
-263|      <button type="submit" id="submitBtn">BOOK NOW</button>
-264|    </form>
-265|
-266|    <div class="success" id="success">
-267|      <h2>✅ Booking Request Submitted</h2>
-268|      <p>Payment details received.</p>
-269|      <p>Yorker Club will verify your payment and confirm the booking shortly.</p>
-270|      <p style="margin-top:10px;">We've prepared a WhatsApp message with your booking details — please send it to confirm faster.</p>
-271|      <a id="waLink" class="wa-btn" href="#" target="_blank" rel="noopener">📱 Send Booking on WhatsApp</a>
-272|    </div>
-273|  </div>
-274|
-275|  <div class="card">
-276|    <h2>📞 Contact Yorker Club</h2>
-277|    <p>📱 WhatsApp: <a href="https://wa.me/919259098933">+91 9259098933</a></p>
-278|    <p>📍 <a href="https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9" target="_blank" rel="noopener">Green City, Behat Road, Saharanpur</a></p>
-279|    <p>🕒 Open Daily: 6:00 AM - 12:00 AM</p>
-280|    <a href="https://wa.me/919259098933"
-281|       style="display:inline-block;margin-top:15px;background:#25D366;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;">
-282|       📱 WhatsApp Booking
-283|    </a>
-284|  </div>
-285|
-286|  <div class="card">
-287|    <h2>📸 Yorker Club Gallery</h2>
-288|    <div class="gallery" style="margin-top:15px;">
-289|      <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=600&q=80" alt="Cricket turf at night">
-290|      <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&q=80" alt="PS5 gaming setup">
-291|      <img src="https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?w=600&q=80" alt="Billiards table">
-292|    </div>
-293|  </div>
-294|
-295|  <div class="card">
-296|    <h2>⭐ Customer Reviews</h2>
-297|    <div class="review">★★★★★ Excellent turf and lighting.<br><b>- Rahul</b></div>
-298|    <div class="review">★★★★★ Best PS5 gaming experience.<br><b>- Aman</b></div>
-299|    <div class="review">★★★★☆ Clean and well maintained.<br><b>- Arjun</b></div>
-300|  </div>
-301|
-302|  <div class="card">
-303|    <h2>📅 Availability — Today's Slots</h2>
-304|    <div class="slots">
-305|      <div class="slot">✅ 6 - 8 AM</div>
-306|      <div class="slot">✅ 8 - 9 AM</div>
-307|      <div class="slot">✅ 9 - 10 AM</div>
-308|      <div class="slot">✅ 10 - 11 AM</div>
-309|      <div class="slot">✅ 11 - 12 PM</div>
-310|      <div class="slot">✅ 12 - 1 PM</div>
-311|      <div class="slot">✅ 1 - 2 PM</div>
-312|      <div class="slot">✅ 2 - 4 PM</div>
-313|      <div class="slot">✅ 4 - 5 PM</div>
-314|      <div class="slot">✅ 5 - 6 PM</div>
-315|      <div class="slot">✅ 6 - 7 PM</div>
-316|      <div class="slot">✅ 7 - 8 PM</div>
-317|      <div class="slot">✅ 8 - 9 PM</div>
-318|      <div class="slot">✅ 9 - 10 PM</div>
-319|      <div class="slot">✅ 10 - 11 PM</div>
-320|      <div class="slot">✅ 11 - 12 AM</div>
-321|    </div>
-322|  </div>
-323|
-324|</div>
-325|
-326|<div class="footer">
-327|  © Yorker Club | Turf • PS5 • Billiards
-328|</div>
-329|
-330|<!-- Hidden iframe used as form target so the page does NOT redirect to Google Forms -->
-331|<iframe name="hiddenFrame" id="hiddenFrame" style="display:none;" title="hidden"></iframe>
-332|
-333|<script>
-334|  // === CONFIG ===
-335|  var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse";
-336|  var WHATSAPP_NUMBER = "919259098933"; // Yorker Club WhatsApp
-337|
-338|  // Field name → entry id mapping (from your Google Form)
-339|  var FIELDS = {
-340|    name: "entry.973165975",
-341|    mobile: "entry.1985601712",
-342|    facility: "entry.734662859",
-343|    date: "entry.748030795",
-344|    time: "entry.456332830",
-345|    hours: "entry.2128269927",
-346|    utr: "entry.55874659"
-347|  };
-348|
-349|  // === Live Total Calculation ===
-350|  function calculateTotal(){
-351|    var sel = document.getElementById("facility");
-352|    var rate = parseInt(sel.options[sel.selectedIndex].getAttribute("data-rate"), 10) || 0;
-353|    var hours = parseInt(document.getElementById("hours").value, 10) || 0;
-354|    document.getElementById("totalAmount").innerText = rate * hours;
-355|    return rate * hours;
-356|  }
-357|
-358|  document.getElementById("facility").addEventListener("change", calculateTotal);
-359|  document.getElementById("hours").addEventListener("input", calculateTotal);
-360|  calculateTotal();
-361|
-362|  // === Form Submission (silent via hidden iframe) ===
-363|  document.getElementById("bookingForm").addEventListener("submit", function(e){
-364|    e.preventDefault();
-365|
-366|    var btn = document.getElementById("submitBtn");
-367|    btn.disabled = true;
-368|    btn.innerText = "Submitting...";
-369|
-370|    var data = {
-371|      name: document.getElementById("custName").value.trim(),
-372|      mobile: document.getElementById("custMobile").value.trim(),
-373|      facility: document.getElementById("facility").value,
-374|      facilityLabel: document.getElementById("facility").options[document.getElementById("facility").selectedIndex].text,
-375|      date: document.getElementById("bookDate").value,
-376|      time: document.getElementById("bookTime").value,
-377|      hours: document.getElementById("hours").value,
-378|      utr: document.getElementById("utr").value.trim(),
-379|      total: calculateTotal()
-380|    };
-381|
-382|    // Build a hidden form posting to Google Forms via hidden iframe
-383|    var hiddenForm = document.createElement("form");
-384|    hiddenForm.action = GOOGLE_FORM_URL;
-385|    hiddenForm.method = "POST";
-386|    hiddenForm.target = "hiddenFrame";
-387|    hiddenForm.style.display = "none";
-388|
-389|    var entries = {};
-390|    entries[FIELDS.name] = data.name;
-391|    entries[FIELDS.mobile] = data.mobile;
-392|    entries[FIELDS.facility] = data.facility;
-393|    entries[FIELDS.date] = data.date;
-394|    entries[FIELDS.time] = data.time;
-395|    entries[FIELDS.hours] = data.hours;
-396|    entries[FIELDS.utr] = data.utr;
-397|
-398|    Object.keys(entries).forEach(function(key){
-399|      var input = document.createElement("input");
-400|      input.type = "hidden";
-401|      input.name = key;
-402|      input.value = entries[key];
-403|      hiddenForm.appendChild(input);
-404|    });
-405|
-406|    document.body.appendChild(hiddenForm);
-407|    hiddenForm.submit();
-408|    document.body.removeChild(hiddenForm);
-409|
-410|    // Build WhatsApp message
-411|    var msg =
-412|      "*🏏 Yorker Club - New Booking*%0A%0A" +
-413|      "👤 *Name:* " + encodeURIComponent(data.name) + "%0A" +
-414|      "📱 *Mobile:* " + encodeURIComponent(data.mobile) + "%0A" +
-415|      "🎯 *Facility:* " + encodeURIComponent(data.facilityLabel) + "%0A" +
-416|      "📅 *Date:* " + encodeURIComponent(data.date) + "%0A" +
-417|      "⏰ *Time:* " + encodeURIComponent(data.time) + "%0A" +
-418|      "⏱️ *Hours:* " + encodeURIComponent(data.hours) + "%0A" +
-419|      "💰 *Total:* ₹" + encodeURIComponent(data.total) + "%0A" +
-420|      "🧾 *UTR:* " + encodeURIComponent(data.utr) + "%0A%0A" +
-421|      "Please confirm my booking. Thank you!";
-422|
-423|    var waUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + msg;
-424|    document.getElementById("waLink").setAttribute("href", waUrl);
-425|
-426|    // Show success section
-427|    document.getElementById("success").style.display = "block";
-428|
-429|    // Reset button
-430|    btn.disabled = false;
-431|    btn.innerText = "BOOK NOW";
-432|
-433|    // Optionally clear UTR so the user can re-book later
-434|    document.getElementById("utr").value = "";
-435|
-436|    // Auto-open WhatsApp in a new tab so the booking message is ready to send
-437|    window.open(waUrl, "_blank");
-438|
-439|    // Scroll to success message
-440|    document.getElementById("success").scrollIntoView({ behavior: "smooth", block: "start" });
-441|  });
-442|</script>
-443|
-444|</body>
-445|</html>
-446|
-[End of file]
+header{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+padding:30px;
+text-align:center;
+}
+
+header h1{
+font-size:42px;
+}
+
+header p{
+margin-top:10px;
+font-size:18px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+margin-bottom:20px;
+}
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.box{
+padding:25px;
+border-radius:12px;
+background:#f8fafc;
+border:2px solid #e2e8f0;
+text-align:center;
+}
+
+.box h3{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.price{
+font-size:30px;
+font-weight:bold;
+color:#16a34a;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:6px;
+font-weight:600;
+}
+
+input,select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+.total{
+background:#dcfce7;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+font-size:24px;
+font-weight:bold;
+color:#15803d;
+text-align:center;
+}
+
+.upi{
+margin-top:20px;
+background:#eff6ff;
+padding:20px;
+border-radius:10px;
+border:1px solid #bfdbfe;
+}
+
+.upi-id{
+font-size:22px;
+font-weight:bold;
+color:#2563eb;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#16a34a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#15803d;
+}
+
+.success{
+display:none;
+margin-top:20px;
+padding:20px;
+background:#dcfce7;
+border-radius:10px;
+text-align:center;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+color:#666;
+}
+
+@media(max-width:600px){
+header h1{
+font-size:30px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏏 Yorker Club</h1>
+<p>Book Turf, PS5 Gaming & Billiards Online</p>
+<p>Open Daily: 6:00 AM - 12:00 AM</p>
+</header>
+
+<div class=\"container\">
+
+<div class=\"card\">
+<h2>Facilities & Pricing</h2>
+
+<div class=\"pricing\">
+
+<div class=\"box\">
+<h3>🏏 Turf Ground</h3>
+<div class=\"price\">₹599/hr</div>
+</div>
+
+<div class=\"box\">
+<h3>🎮 PS5 Gaming</h3>
+<div class=\"price\">₹119/hr pr person</div>
+</div>
+
+<div class=\"box\">
+<h3>🎱 Billiards</h3>
+<div class=\"price\">₹179/hr</div>
+</div>
+
+</div>
+</div>
+
+<div class=\"card\">
+
+<h2>Book Your Slot</h2>
+
+<form id=\"bookingForm\"
+action=\"https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse\"
+method=\"POST\"
+target=\"hiddenFrame\">
+
+<label>Customer Name</label>
+<input type=\"text\" name=\"entry.973165975\" required>
+
+
+
+
+
+
+<label>Mobile Number</label>
+<input type=\"tel\" name=\"entry.1985601712\" required>
+
+
+<label>Select Facility</label>
+<select name=\"entry.734662859\" required>
+
+    <option value=\"TURF\">🏏 Turf Ground</option>
+    <option value=\"PS5\">🎮 PS5 Gaming</option>
+    <option value=\"BILLIARDS\">🎱 Billiards</option>
+</select>
+<label>Select Date</label>
+<input type=\"date\" name=\"entry.748030795\" required>
+    
+<label>Select Time</label>
+<input type=\"time\" name=\"entry.456332830\" required>
+
+
+
+<label>Hours</label>
+<input type=\"number\" name=\"entry.2128269927\" min=\"1\" value=\"1\" required>
+
+<div class=\"upi\">
+    <h3>💳 Pay via UPI</h3>
+    <div class=\"upi-id\">7055060338@ptyes</div>
+    <p>After payment, enter the UTR number below.</p>
+</div>
+
+<label>UPI Transaction ID</label>
+<input type=\"text\" name=\"entry.55874659\" placeholder=\"Enter UTR Number\" required>
+
+<button type=\"submit\">BOOK NOW</button>
+
+</form>
+
+<div class=\"success\" id=\"success\">
+<h2>✅ Booking Request Submitted</h2>
+<p>Payment details received.</p>
+<p>Yorker Club will verify payment and confirm your booking.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class=\"footer\">
+© Yorker Club | Turf • PS5 • Billiards
+</div>
+
+<!-- Hidden iframe so the page does NOT redirect to Google Forms -->
+<iframe name=\"hiddenFrame\" style=\"display:none;\"></iframe>
+
+<script>
+document.getElementById(\"bookingForm\").addEventListener(\"submit\", function(e){
+    // form still submits to Google (via hidden iframe), we just show success
+    document.getElementById(\"success\").style.display = \"block\";
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: \"smooth\"
+    });
+});
+</script>
+
+<div style=\"text-align:center;padding:20px;background:#fff;margin-top:20px;\">
+    <h3>📞 Contact Yorker Club</h3>
+    <p>📱 WhatsApp:919259098933</p>
+    <p>
+📍 <a href=\"https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9\" target=\"_blank\">
+Green City, Behat Road, Saharanpur
+</a>
+</p>
+    <p>🕒 Open Daily: 6:00 AM - 12:00 AM</p>
+
+    <a href=\"https://wa.me/919259098933\"
+       style=\"background:#25D366;color:white;padding:12px 20px;
+       border-radius:8px;text-decoration:none;\">
+       📱 WhatsApp Booking
+    </a>
+</div>
+<hr style=\"margin:30px 0;\">
+
+<hr style=\"margin:30px 0;\">
+
+<h2 style=\"text-align:center;\">📸 Yorker Club Gallery</h2>
+
+<div style=\"display:flex;gap:15px;justify-content:center;flex-wrap:wrap;\">
+
+<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.41%20AM.jpeg\"
+     width=\"300\">
+
+<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM.jpeg\"
+     width=\"300\">
+
+<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM%20(1).jpeg\"
+     width=\"300\">
+
+</div>
+
+<hr style=\"margin:30px 0;\">
+
+<h2 style=\"text-align:center;\">⭐ Customer Reviews</h2>
+
+<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">
+★★★★★ Excellent turf and lighting.
+<br><b>- Rahul</b>
+</div>
+
+<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">
+★★★★★ Best PS5 gaming experience.
+<br><b>- Aman</b>
+</div>
+
+<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">
+★★★★☆ Clean and well maintained.
+<br><b>- Arjun</b>
+</div>
+
+<hr style=\"margin:30px 0;\">
+
+<h2 style=\"text-align:center;\">📅 Availability</h2>
+
+<div style=\"text-align:center;background:#fff;padding:20px;border-radius:10px;\">
+Today Available Slots:
+<br><br>
+✅ 6 AM - 8 AM
+<br>
+✅ 8 AM - 9AM
+<br>
+✅ 9 AM - 10 AM 
+<br>
+✅ 10 AM - 11AM
+<br>
+✅ 11 AM - 12 PM 
+<br>
+✅ 12 PM - 1 PM
+<br>
+✅ 1 PM - 2 PM
+<br>
+✅ 2 PM - 4 PM
+<br>
+✅ 4 PM - 5PM
+<br>
+✅ 5 PM - 6 PM
+<br>
+✅ 6 PM - 7 PM
+<br>
+✅ 7 PM - 8 PM
+<br>
+✅ 8 PM - 9 PM
+<br>
+✅ 9 PM - 10 PM 
+<br>
+✅ 10 PM -11PM
+<br>
+✅ 11 PM - 12 AM
+<br>
+</div>
+</body>
+</html>
+"
+Observation: Overwrite successful: /app/yorker_club.html
