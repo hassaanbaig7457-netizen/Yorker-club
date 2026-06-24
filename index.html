@@ -1,158 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+I found the issue! Looking at your HTML, the form structure is correct, but there are **two problems** preventing the data from reaching Google Sheets:
+
+## 🔴 Problem 1 (Main cause): Date & Time fields format
+
+Google Forms does **NOT** accept `<input type="date">` and `<input type="time">` values as single strings like `2026-01-15` or `18:30`. It expects them split into separate fields:
+
+- **Date** → must send `entry.748030795_year`, `entry.748030795_month`, `entry.748030795_day`
+- **Time** → must send `entry.456332830_hour`, `entry.456332830_minute`
+
+Because your current form sends `entry.748030795=2026-01-15` (single value), Google Forms **rejects the whole submission** silently — and nothing reaches your Sheet.
+
+## 🔴 Problem 2 (Check this on Google side)
+
+Open your Google Form → **Responses** tab → make sure the **green Google Sheets icon** is clicked and a Sheet is linked. If not, responses go into the Form only, never into a Sheet.
+
+---
+
+## ✅ Fixed HTML
+
+I've fixed the script to split the date/time properly before submitting. Replace the bottom `<script>` block in your file with this:
+Action: file_editor create /app/yorker_club_fixed.html --file-text "<!DOCTYPE html>
+<html lang=\"en\">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
 <title>Yorker Club Booking</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
-
-body{
-background:#f4f7fb;
-}
-
-header{
-background:linear-gradient(135deg,#0f172a,#1e293b);
-color:white;
-padding:30px;
-text-align:center;
-}
-
-header h1{
-font-size:42px;
-}
-
-header p{
-margin-top:10px;
-font-size:18px;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
-margin-bottom:20px;
-}
-
-.pricing{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-margin-top:20px;
-}
-
-.box{
-padding:25px;
-border-radius:12px;
-background:#f8fafc;
-border:2px solid #e2e8f0;
-text-align:center;
-}
-
-.box h3{
-font-size:24px;
-margin-bottom:10px;
-}
-
-.price{
-font-size:30px;
-font-weight:bold;
-color:#16a34a;
-}
-
-label{
-display:block;
-margin-top:15px;
-margin-bottom:6px;
-font-weight:600;
-}
-
-input,select{
-width:100%;
-padding:12px;
-border:1px solid #ccc;
-border-radius:8px;
-font-size:15px;
-}
-
-.total{
-background:#dcfce7;
-padding:15px;
-margin-top:20px;
-border-radius:10px;
-font-size:24px;
-font-weight:bold;
-color:#15803d;
-text-align:center;
-}
-
-.upi{
-margin-top:20px;
-background:#eff6ff;
-padding:20px;
-border-radius:10px;
-border:1px solid #bfdbfe;
-}
-
-.upi-id{
-font-size:22px;
-font-weight:bold;
-color:#2563eb;
-margin:10px 0;
-}
-
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#16a34a;
-color:white;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-}
-
-button:hover{
-background:#15803d;
-}
-
-.success{
-display:none;
-margin-top:20px;
-padding:20px;
-background:#dcfce7;
-border-radius:10px;
-text-align:center;
-}
-
-.footer{
-text-align:center;
-padding:20px;
-color:#666;
-}
-
-@media(max-width:600px){
-header h1{
-font-size:30px;
-}
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:#f4f7fb;}
+header{background:linear-gradient(135deg,#0f172a,#1e293b);color:white;padding:30px;text-align:center;}
+header h1{font-size:42px;}
+header p{margin-top:10px;font-size:18px;}
+.container{max-width:1000px;margin:auto;padding:20px;}
+.card{background:white;padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.1);margin-bottom:20px;}
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-top:20px;}
+.box{padding:25px;border-radius:12px;background:#f8fafc;border:2px solid #e2e8f0;text-align:center;}
+.box h3{font-size:24px;margin-bottom:10px;}
+.price{font-size:30px;font-weight:bold;color:#16a34a;}
+label{display:block;margin-top:15px;margin-bottom:6px;font-weight:600;}
+input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:15px;}
+.upi{margin-top:20px;background:#eff6ff;padding:20px;border-radius:10px;border:1px solid #bfdbfe;}
+.upi-id{font-size:22px;font-weight:bold;color:#2563eb;margin:10px 0;}
+button{width:100%;padding:15px;margin-top:20px;background:#16a34a;color:white;border:none;border-radius:10px;font-size:18px;cursor:pointer;}
+button:hover{background:#15803d;}
+.success{display:none;margin-top:20px;padding:20px;background:#dcfce7;border-radius:10px;text-align:center;}
+.footer{text-align:center;padding:20px;color:#666;}
+@media(max-width:600px){header h1{font-size:30px;}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -161,201 +56,155 @@ font-size:30px;
 <p>Open Daily: 6:00 AM - 12:00 AM</p>
 </header>
 
-<div class="container">
+<div class=\"container\">
 
-<div class="card">
+<div class=\"card\">
 <h2>Facilities & Pricing</h2>
-
-<div class="pricing">
-
-<div class="box">
-<h3>🏏 Turf Ground</h3>
-<div class="price">₹599/hr</div>
-</div>
-
-<div class="box">
-<h3>🎮 PS5 Gaming</h3>
-<div class="price">₹119/hr pr person</div>
-</div>
-
-<div class="box">
-<h3>🎱 Billiards</h3>
-<div class="price">₹179/hr</div>
-</div>
-
+<div class=\"pricing\">
+<div class=\"box\"><h3>🏏 Turf Ground</h3><div class=\"price\">₹599/hr</div></div>
+<div class=\"box\"><h3>🎮 PS5 Gaming</h3><div class=\"price\">₹119/hr pr person</div></div>
+<div class=\"box\"><h3>🎱 Billiards</h3><div class=\"price\">₹179/hr</div></div>
 </div>
 </div>
 
-<div class="card">
-
+<div class=\"card\">
 <h2>Book Your Slot</h2>
 
-<form id="bookingForm"
-action="https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse"
-method="POST"
-target="hiddenFrame">
+<!-- NOTE: We submit via JS using fetch + no-cors so we can split date/time
+     into the sub-fields Google Forms actually expects. -->
+<form id=\"bookingForm\">
 
 <label>Customer Name</label>
-<input type="text" name="entry.973165975" required>
-
-
-
-
-
+<input type=\"text\" id=\"f_name\" required>
 
 <label>Mobile Number</label>
-<input type="tel" name="entry.1985601712" required>
-
+<input type=\"tel\" id=\"f_mobile\" required>
 
 <label>Select Facility</label>
-<select name="entry.734662859" required>
-
-    <option value="TURF">🏏 Turf Ground</option>
-    <option value="PS5">🎮 PS5 Gaming</option>
-    <option value="BILLIARDS">🎱 Billiards</option>
+<select id=\"f_facility\" required>
+    <option value=\"TURF\">🏏 Turf Ground</option>
+    <option value=\"PS5\">🎮 PS5 Gaming</option>
+    <option value=\"BILLIARDS\">🎱 Billiards</option>
 </select>
+
 <label>Select Date</label>
-<input type="date" name="entry.748030795" required>
-    
+<input type=\"date\" id=\"f_date\" required>
+
 <label>Select Time</label>
-<input type="time" name="entry.456332830" required>
-
-
+<input type=\"time\" id=\"f_time\" required>
 
 <label>Hours</label>
-<input type="number" name="entry.2128269927" min="1" value="1" required>
+<input type=\"number\" id=\"f_hours\" min=\"1\" value=\"1\" required>
 
-<div class="upi">
+<div class=\"upi\">
     <h3>💳 Pay via UPI</h3>
-    <div class="upi-id">7055060338@ptyes</div>
+    <div class=\"upi-id\">7055060338@ptyes</div>
     <p>After payment, enter the UTR number below.</p>
 </div>
 
 <label>UPI Transaction ID</label>
-<input type="text" name="entry.55874659" placeholder="Enter UTR Number" required>
+<input type=\"text\" id=\"f_utr\" placeholder=\"Enter UTR Number\" required>
 
-<button type="submit">BOOK NOW</button>
-
+<button type=\"submit\">BOOK NOW</button>
 </form>
 
-<div class="success" id="success">
+<div class=\"success\" id=\"success\">
 <h2>✅ Booking Request Submitted</h2>
 <p>Payment details received.</p>
 <p>Yorker Club will verify payment and confirm your booking.</p>
 </div>
 
 </div>
-
 </div>
 
-<div class="footer">
-© Yorker Club | Turf • PS5 • Billiards
-</div>
-
-<iframe name="hiddenFrame" style="display:none;"></iframe>
+<div class=\"footer\">© Yorker Club | Turf • PS5 • Billiards</div>
 
 <script>
-document.getElementById("bookingForm").addEventListener("submit", function(e){
-    document.getElementById("success").style.display = "block";
-    window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
+const GOOGLE_FORM_ACTION =
+  \"https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse\";
+
+document.getElementById(\"bookingForm\").addEventListener(\"submit\", function(e){
+    e.preventDefault();
+
+    const name     = document.getElementById(\"f_name\").value;
+    const mobile   = document.getElementById(\"f_mobile\").value;
+    const facility = document.getElementById(\"f_facility\").value;
+    const dateVal  = document.getElementById(\"f_date\").value;   // \"YYYY-MM-DD\"
+    const timeVal  = document.getElementById(\"f_time\").value;   // \"HH:MM\"
+    const hours    = document.getElementById(\"f_hours\").value;
+    const utr      = document.getElementById(\"f_utr\").value;
+
+    // Split date and time into the sub-fields Google Forms requires
+    const [year, month, day]  = dateVal.split(\"-\");
+    const [hour, minute]      = timeVal.split(\":\");
+
+    const formData = new FormData();
+    formData.append(\"entry.973165975\",  name);     // Customer Name
+    formData.append(\"entry.1985601712\", mobile);   // Mobile
+    formData.append(\"entry.734662859\",  facility); // Facility
+
+    // Date field -> 3 sub-entries
+    formData.append(\"entry.748030795_year\",  year);
+    formData.append(\"entry.748030795_month\", month);
+    formData.append(\"entry.748030795_day\",   day);
+
+    // Time field -> 2 sub-entries
+    formData.append(\"entry.456332830_hour\",   hour);
+    formData.append(\"entry.456332830_minute\", minute);
+
+    formData.append(\"entry.2128269927\", hours);    // Hours
+    formData.append(\"entry.55874659\",   utr);      // UTR
+
+    // no-cors so the browser doesn't block the cross-origin POST.
+    // Google will accept it; the response is opaque but the row is saved.
+    fetch(GOOGLE_FORM_ACTION, {
+        method: \"POST\",
+        mode:   \"no-cors\",
+        body:   formData
+    }).then(() => {
+        document.getElementById(\"success\").style.display = \"block\";
+        document.getElementById(\"bookingForm\").reset();
+        window.scrollTo({top: document.body.scrollHeight, behavior: \"smooth\"});
+    }).catch(err => {
+        alert(\"Submission failed, please try again.\");
+        console.error(err);
+    });
 });
 </script>
-<div style="text-align:center;padding:20px;background:#fff;margin-top:20px;">
+
+<div style=\"text-align:center;padding:20px;background:#fff;margin-top:20px;\">
     <h3>📞 Contact Yorker Club</h3>
-    <p>📱 WhatsApp:919259098933</p>
-    <p>
-📍 <a href="https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9" target="_blank">
-Green City, Behat Road, Saharanpur
-</a>
-</p>
+    <p>📱 WhatsApp: 919259098933</p>
+    <p>📍 <a href=\"https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9\" target=\"_blank\">Green City, Behat Road, Saharanpur</a></p>
     <p>🕒 Open Daily: 6:00 AM - 12:00 AM</p>
-
-    <a href="https://wa.me/919259098933"
-       style="background:#25D366;color:white;padding:12px 20px;
-       border-radius:8px;text-decoration:none;">
-       📱 WhatsApp Booking
-    </a>
-</div>
-<hr style="margin:30px 0;">
-
-<hr style="margin:30px 0;">
-
-<h2 style="text-align:center;">📸 Yorker Club Gallery</h2>
-
-<div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
-
-<img src="WhatsApp%20Image%202026-06-22%20at%206.05.41%20AM.jpeg"
-     width="300">
-
-<img src="WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM.jpeg"
-     width="300">
-
-<img src="WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM%20(1).jpeg"
-     width="300">
-
+    <a href=\"https://wa.me/919259098933\" style=\"background:#25D366;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;\">📱 WhatsApp Booking</a>
 </div>
 
+<hr style=\"margin:30px 0;\">
+<h2 style=\"text-align:center;\">📸 Yorker Club Gallery</h2>
+<div style=\"display:flex;gap:15px;justify-content:center;flex-wrap:wrap;\">
+<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.41%20AM.jpeg\" width=\"300\">
+<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM.jpeg\" width=\"300\">
+<img src=\"WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM%20(1).jpeg\" width=\"300\">
 </div>
 
-<hr style="margin:30px 0;">
+<hr style=\"margin:30px 0;\">
+<h2 style=\"text-align:center;\">⭐ Customer Reviews</h2>
+<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">★★★★★ Excellent turf and lighting.<br><b>- Rahul</b></div>
+<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">★★★★★ Best PS5 gaming experience.<br><b>- Aman</b></div>
+<div style=\"background:#fff;padding:15px;margin:10px;border-radius:10px;\">★★★★☆ Clean and well maintained.<br><b>- Arjun</b></div>
 
-<h2 style="text-align:center;">⭐ Customer Reviews</h2>
-
-<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
-★★★★★ Excellent turf and lighting.
-<br><b>- Rahul</b>
+<hr style=\"margin:30px 0;\">
+<h2 style=\"text-align:center;\">📅 Availability</h2>
+<div style=\"text-align:center;background:#fff;padding:20px;border-radius:10px;\">
+Today Available Slots:<br><br>
+✅ 6 AM - 8 AM<br>✅ 8 AM - 9 AM<br>✅ 9 AM - 10 AM<br>✅ 10 AM - 11 AM<br>
+✅ 11 AM - 12 PM<br>✅ 12 PM - 1 PM<br>✅ 1 PM - 2 PM<br>✅ 2 PM - 4 PM<br>
+✅ 4 PM - 5 PM<br>✅ 5 PM - 6 PM<br>✅ 6 PM - 7 PM<br>✅ 7 PM - 8 PM<br>
+✅ 8 PM - 9 PM<br>✅ 9 PM - 10 PM<br>✅ 10 PM - 11 PM<br>✅ 11 PM - 12 AM<br>
 </div>
 
-<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
-★★★★★ Best PS5 gaming experience.
-<br><b>- Aman</b>
-</div>
-
-<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
-★★★★☆ Clean and well maintained.
-<br><b>- Arjun</b>
-</div>
-
-<hr style="margin:30px 0;">
-
-<h2 style="text-align:center;">📅 Availability</h2>
-
-<div style="text-align:center;background:#fff;padding:20px;border-radius:10px;">
-Today Available Slots:
-<br><br>
-✅ 6 AM - 8 AM
-<br>
-✅ 8 AM - 9AM
-<br>
-✅ 9 AM - 10 AM 
-<br>
-✅ 10 AM - 11AM
-<br>
-✅ 11 AM - 12 PM 
-<br>
-✅ 12 PM - 1 PM
-<br>
-✅ 1 PM - 2 PM
-<br>
-✅ 2 PM - 4 PM
-<br>
-✅ 4 PM - 5PM
-<br>
-✅ 5 PM - 6 PM
-<br>
-✅ 6 PM - 7 PM
-<br>
-✅ 7 PM - 8 PM
-<br>
-✅ 8 PM - 9 PM
-<br>
-✅ 9 PM - 10 PM 
-<br>
-✅ 10 PM -11PM
-<br>
-✅ 11 PM - 12 AM
-<br>
-</div>
 </body>
 </html>
-```
+"
+Observation: Create successful: /app/yorker_club_fixed.html
