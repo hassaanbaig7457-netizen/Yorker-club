@@ -1,361 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yorker Club Booking</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-body{
-background:#f4f7fb;
-}
+<title>Yorkers Club | Premium Cricket Turf & Gaming Arena</title>
 
-header{
-background:linear-gradient(135deg,#0f172a,#1e293b);
-color:white;
-padding:30px;
-text-align:center;
-}
+<meta name="description"
+content="Yorkers Club - Cricket Turf, PS5 Gaming, Billiards, Maggie Cafe and Cricket Ball Shop.">
 
-header h1{
-font-size:42px;
-}
+<meta name="keywords"
+content="Yorkers Club, Cricket Turf, PS5, Gaming, Saharanpur, Maggie Cafe">
 
-header p{
-margin-top:10px;
-font-size:18px;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-.card{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
-margin-bottom:20px;
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
-.pricing{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-margin-top:20px;
-}
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-.box{
-padding:25px;
-border-radius:12px;
-background:#f8fafc;
-border:2px solid #e2e8f0;
-text-align:center;
-}
+<link rel="stylesheet"
+href="style.css">
 
-.box h3{
-font-size:24px;
-margin-bottom:10px;
-}
-
-.price{
-font-size:30px;
-font-weight:bold;
-color:#16a34a;
-}
-
-label{
-display:block;
-margin-top:15px;
-margin-bottom:6px;
-font-weight:600;
-}
-
-input,select{
-width:100%;
-padding:12px;
-border:1px solid #ccc;
-border-radius:8px;
-font-size:15px;
-}
-
-.total{
-background:#dcfce7;
-padding:15px;
-margin-top:20px;
-border-radius:10px;
-font-size:24px;
-font-weight:bold;
-color:#15803d;
-text-align:center;
-}
-
-.upi{
-margin-top:20px;
-background:#eff6ff;
-padding:20px;
-border-radius:10px;
-border:1px solid #bfdbfe;
-}
-
-.upi-id{
-font-size:22px;
-font-weight:bold;
-color:#2563eb;
-margin:10px 0;
-}
-
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#16a34a;
-color:white;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-}
-
-button:hover{
-background:#15803d;
-}
-
-.success{
-display:none;
-margin-top:20px;
-padding:20px;
-background:#dcfce7;
-border-radius:10px;
-text-align:center;
-}
-
-.footer{
-text-align:center;
-padding:20px;
-color:#666;
-}
-
-@media(max-width:600px){
-header h1{
-font-size:30px;
-}
-}
-</style>
 </head>
 
 <body>
 
+<!-- Loader -->
+
+<div id="loader">
+
+<div class="loader-ring"></div>
+
+<h1>Yorkers Club</h1>
+
+</div>
+
+<!-- Back To Top -->
+
+<button id="topBtn">
+
+<i class="fas fa-chevron-up"></i>
+
+</button>
+
+<!-- Theme Toggle -->
+
+<button id="themeBtn">
+
+<i class="fas fa-moon"></i>
+
+</button>
+
+<!-- WhatsApp -->
+
+<a href="https://wa.me/919259098933"
+
+class="whatsapp"
+
+target="_blank">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<!-- Navigation -->
+
 <header>
-<h1>🏏 Yorker Club</h1>
-<p>Book Turf, PS5 Gaming & Billiards Online</p>
-<p>Open Daily: 6:00 AM - 12:00 AM</p>
+
+<nav>
+
+<div class="logo">
+
+<i class="fas fa-baseball-ball"></i>
+
+<span>Yorkers Club</span>
+
+</div>
+
+<ul>
+
+<li><a href="#home">Home</a></li>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#services">Services</a></li>
+
+<li><a href="#booking">Book</a></li>
+
+<li><a href="#food">Food</a></li>
+
+<li><a href="#shop">Shop</a></li>
+
+<li><a href="#gallery">Gallery</a></li>
+
+<li><a href="#reviews">Reviews</a></li>
+
+<li><a href="#faq">FAQ</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+<li><a href="#admin">Admin</a></li>
+
+</ul>
+
+<div class="search">
+
+<input
+
+type="text"
+
+placeholder="Search..."
+
+id="searchBox">
+
+</div>
+
+</nav>
+
 </header>
 
-<div class="container">
+<!-- Hero -->
 
-<div class="card">
-<h2>Facilities & Pricing</h2>
+<section id="home" class="hero">
 
-<div class="pricing">
+<div class="overlay"></div>
 
-<div class="box">
-<h3>🏏 Turf Ground</h3>
-<div class="price">₹599/hr</div>
-</div>
+<div class="hero-content">
 
-<div class="box">
-<h3>🎮 PS5 Gaming</h3>
-<div class="price">₹119/hr pr person</div>
-</div>
+<h1>
 
-<div class="box">
-<h3>🎱 Billiards</h3>
-<div class="price">₹179/hr</div>
-</div>
+Experience
 
-</div>
-</div>
+<span>Sports</span>
 
-<div class="card">
+&
 
-<h2>Book Your Slot</h2>
+<span>Gaming</span>
 
-<form id="bookingForm"
-action="https://docs.google.com/forms/d/e/1FAIpQLScavK1POAQueDRJUOQAhE10Ncpipk2E8axExg6nO8B4BY8O-Q/formResponse"
-method="POST"
-target="hiddenFrame">
+Like Never Before
 
-<label>Customer Name</label>
-<input type="text" name="entry.973165975" required>
+</h1>
 
+<p>
 
+Premium Cricket Turf • PS5 Arena • Billiards • Maggie Cafe
 
-
-
-
-<label>Mobile Number</label>
-<input type="tel" name="entry.1985601712" required>
-
-
-<label>Select Facility</label>
-<select name="entry.734662859" required>
-
-    <option value="TURF">🏏 Turf Ground</option>
-    <option value="PS5">🎮 PS5 Gaming</option>
-    <option value="BILLIARDS">🎱 Billiards</option>
-</select>
-<label>Select Date</label>
-<input type="date" name="entry.748030795" required>
-    
-<label>Select Time</label>
-<input type="time" name="entry.456332830" required>
-
-
-
-<label>Hours</label>
-<input type="number" name="entry.2128269927" min="1" value="1" required>
-
-<div class="upi">
-    <h3>💳 Pay via UPI</h3>
-    <div class="upi-id">7055060338@ptyes</div>
-    <p>After payment, enter the UTR number below.</p>
-</div>
-
-<label>UPI Transaction ID</label>
-<input type="text" name="entry.55874659" placeholder="Enter UTR Number" required>
-
-<button type="submit">BOOK NOW</button>
-
-</form>
-
-<div class="success" id="success">
-<h2>✅ Booking Request Submitted</h2>
-<p>Payment details received.</p>
-<p>Yorker Club will verify payment and confirm your booking.</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="footer">
-© Yorker Club | Turf • PS5 • Billiards
-</div>
-
-<iframe name="hiddenFrame" style="display:none;"></iframe>
-
-<script>
-document.getElementById("bookingForm").addEventListener("submit", function(e){
-    document.getElementById("success").style.display = "block";
-    window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
-});
-</script>
-<div style="text-align:center;padding:20px;background:#fff;margin-top:20px;">
-    <h3>📞 Contact Yorker Club</h3>
-    <p>📱 WhatsApp:919259098933</p>
-    <p>
-📍 <a href="https://maps.app.goo.gl/kCN5KfB9RUHzHZXX9" target="_blank">
-Green City, Behat Road, Saharanpur
-</a>
 </p>
-    <p>🕒 Open Daily: 6:00 AM - 12:00 AM</p>
 
-    <a href="https://wa.me/919259098933"
-       style="background:#25D366;color:white;padding:12px 20px;
-       border-radius:8px;text-decoration:none;">
-       📱 WhatsApp Booking
-    </a>
-</div>
-<hr style="margin:30px 0;">
+<div class="hero-buttons">
 
-<hr style="margin:30px 0;">
+<a href="#booking"
 
-<h2 style="text-align:center;">📸 Yorker Club Gallery</h2>
+class="btn">
 
-<div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+Book Now
 
-<img src="WhatsApp%20Image%202026-06-22%20at%206.05.41%20AM.jpeg"
-     width="300">
+</a>
 
-<img src="WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM.jpeg"
-     width="300">
+<a href="#food"
 
-<img src="WhatsApp%20Image%202026-06-22%20at%206.05.42%20AM%20(1).jpeg"
-     width="300">
+class="btn secondary">
 
-</div>
+Order Food
 
-</div>
+</a>
 
-<hr style="margin:30px 0;">
+<button
 
-<h2 style="text-align:center;">⭐ Customer Reviews</h2>
+class="btn aiBtn"
 
-<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
-★★★★★ Excellent turf and lighting.
-<br><b>- Rahul</b>
+id="chatOpen">
+
+Chat With AI
+
+</button>
+
 </div>
 
-<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
-★★★★★ Best PS5 gaming experience.
-<br><b>- Aman</b>
 </div>
 
-<div style="background:#fff;padding:15px;margin:10px;border-radius:10px;">
-★★★★☆ Clean and well maintained.
-<br><b>- Arjun</b>
+</section>
+
+<!-- Statistics -->
+
+<section class="stats">
+
+<div class="card">
+
+<h2 data-target="5000">
+
+0
+
+</h2>
+
+<p>
+
+Happy Customers
+
+</p>
+
 </div>
 
-<hr style="margin:30px 0;">
+<div class="card">
 
-<h2 style="text-align:center;">📅 Availability</h2>
+<h2 data-target="1200">
 
-<div style="text-align:center;background:#fff;padding:20px;border-radius:10px;">
-Today Available Slots:
-<br><br>
-✅ 6 AM - 8 AM
-<br>
-✅ 8 AM - 9AM
-<br>
-✅ 9 AM - 10 AM 
-<br>
-✅ 10 AM - 11AM
-<br>
-✅ 11 AM - 12 PM 
-<br>
-✅ 12 PM - 1 PM
-<br>
-✅ 1 PM - 2 PM
-<br>
-✅ 2 PM - 4 PM
-<br>
-✅ 4 PM - 5PM
-<br>
-✅ 5 PM - 6 PM
-<br>
-✅ 6 PM - 7 PM
-<br>
-✅ 7 PM - 8 PM
-<br>
-✅ 8 PM - 9 PM
-<br>
-✅ 9 PM - 10 PM 
-<br>
-✅ 10 PM -11PM
-<br>
-✅ 11 PM - 12 AM
-<br>
+0
+
+</h2>
+
+<p>
+
+Bookings
+
+</p>
+
 </div>
-</body>
-</html>
-```
+
+<div class="card">
+
+<h2 data-target="350">
+
+0
+
+</h2>
+
+<p>
+
+Food Orders
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 data-target="700">
+
+0
+
+</h2>
+
+<p>
+
+Gaming Sessions
+
+</p>
+
+</div>
+
+</section>
+
+<!-- About -->
+
+<section id="about">
+
+<h2>
+
+About Yorkers Club
+
+</h2>
+
+<p>
+
+Yorkers Club is Saharanpur's premium destination for Cricket Turf, PS5 Gaming, Billiards, Maggie Cafe and Cricket Ball Shopping.
+
+Designed with a luxurious sports theme, our arena delivers world-class experiences for every age group.
+
+</p>
+
+<div class="about-grid">
+
+<div class="glass">
+
+<i class="fas fa-futbol"></i>
+
+<h3>Premium Turf</h3>
+
+<p>
+
+Professional cricket turf available for hourly bookings.
+
+</p>
+
+</div>
+
+<div class="glass">
+
+<i class="fas fa-gamepad"></i>
+
+<h3>PS5 Lounge</h3>
+
+<p>
+
+Enjoy latest PS5 games with premium setup.
+
+</p>
+
+</div>
+
+<div class="glass">
+
+<i class="fas fa-table-tennis"></i>
+
+<h3>Billiards</h3>
+
+<p>
+
+Relax with premium billiards tables.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Featured Services -->
+
+<section id="services">
+
+<h2>
+
+Featured Services
+
+</h2>
+
+<div class="service-grid">
+
+<div class="service">
+
+<img src="images/turf.jpg">
+
+<h3>Cricket Turf</h3>
+
+<p>
+
+₹649 / Hour
+
+</p>
+
+<button>
+
+Book
+
+</button>
+
+</div>
+
+<div class="service">
+
+<img src="images/ps5.jpg">
+
+<h3>PS5 Gaming</h3>
+
+<p>
+
+₹119 / Hour
+
+</p>
+
+<button>
+
+Play Now
+
+</button>
+
+</div>
+
+<div class="service">
+
+<img src="images/billiards.jpg">
+
+<h3>Billiards</h3>
+
+<p>
+
+₹179 / Hour
+
+</p>
+
+<button>
+
+Reserve
+
+</button>
+
+</div>
+
+<div class="service">
+
+<img src="images/maggie.jpg">
+
+<h3>Maggie Cafe</h3>
+
+<p>
+
+Fresh & Delicious
+
+</p>
+
+<button>
+
+Order
+
+</button>
+
+</div>
+
+</div>
+
+</section>
